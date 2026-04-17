@@ -78,10 +78,6 @@ body {
     animation: float 3s ease-in-out infinite;
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
 @keyframes glow {
     0%,
     100% {
@@ -100,6 +96,27 @@ button:active {
     transition: transform 0.15s ease;
 }
 
+.button-click:hover {
+    transform: scale(1.05);
+}
+
 .button-click:active {
-    transform: scale(0.92);
+    transform: scale(0.9);
+}
+
+.shine {
+    background: linear-gradient(120deg, #fb923c 20%, #f87102 40%, #fb923c 60%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    0% {
+        background-position: -200%;
+    }
+    100% {
+        background-position: 200%;
+    }
 }

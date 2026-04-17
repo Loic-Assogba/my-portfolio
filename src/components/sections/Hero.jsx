@@ -26,11 +26,11 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex justify-center lg:justify-start gap-4 p-4">
-                        <button className="bg-orange-400 text-white text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-500 transition">
+                        <button className="bg-orange-400 text-white text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-500 transition hover">
                             Mes projets
                         </button>
 
-                        <button className="border border-orange-400 text-orange-400 text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-400 hover:text-white transition">
+                        <button className="border border-orange-400 text-orange-400 text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-400/10 hover:text-orange-400 transition hover">
                             Mon CV
                         </button>
                     </div>
