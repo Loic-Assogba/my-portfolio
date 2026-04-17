@@ -3,8 +3,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function A_propos() {
     return (
-        <section className="min-h-[90vh] bg-gray-950">
-            <h1 className="font-clash text-3xl font-bold lg:text-6xl text-center w-full p-4 md:text-4xl mb-6">
+        <section id="a_propos" className="min-h-[90vh] bg-gray-950">
+            <h1 className="font-clash text-3xl font-bold pt-20 lg:text-6xl text-center w-full p-4 md:text-4xl mb-6">
                 À{' '}
                 <span className="inline-block text-orange-400 animate-float">
                     propos de moi

@@ -5,6 +5,14 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
+    const links = [
+        { name: 'Accueil', href: '#hero' },
+        { name: 'À propos', href: '#a_propos' },
+        { name: 'Projets', href: '#projets' },
+        { name: 'CV', href: '#cv' },
+        { name: 'Contact', href: '#contact' },
+    ];
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 20) {
@@ -22,6 +30,7 @@ export default function Header() {
     return (
         <>
             {/* ================= MOBILE HEADER ================= */}
+
             <header
                 className={`flex items-center justify-between text-white p-4 lg:hidden transition-all duration-300 sticky top-0 z-40
                 ${
@@ -31,13 +40,15 @@ export default function Header() {
                 }`}
             >
                 <a
-                    href="/"
+                    href="#hero"
                     className="transition-transform duration-300 hover:scale-[1.03]"
                 >
                     <h1 className="font-clash font-bold text-lg relative group">
-                        <span className="inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
-                            Loïc Assogba
-                        </span>
+                        <a href="#hero">
+                            <span className="inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
+                                Loïc Assogba
+                            </span>
+                        </a>
 
                         <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
                     </h1>
@@ -52,6 +63,7 @@ export default function Header() {
             </header>
 
             {/* ================= MOBILE MENU ================= */}
+
             {isMenuOpen && (
                 <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
                     <nav className="absolute top-0 right-0 w-3/4 h-min m-2 rounded-2xl bg-gray-950 text-white p-6 shadow-2xl animate-slide-in">
@@ -63,19 +75,14 @@ export default function Header() {
                         </button>
 
                         <ul className="space-y-6 text-sm font-satoshi">
-                            {[
-                                'Accueil',
-                                'À propos',
-                                'Projets',
-                                'CV',
-                                'Contact',
-                            ].map((item, i) => (
+                            {links.map((item, i) => (
                                 <li key={i}>
                                     <a
-                                        href="/"
-                                        className="px-3 py-2 rounded-md transition-all duration-150 hover:bg-orange-400/10 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
+                                        href={item.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="block px-3 py-2 rounded-md transition-all duration-150 hover:bg-orange-400/10 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
                                     >
-                                        {item}
+                                        {item.name}
                                     </a>
                                 </li>
                             ))}
@@ -85,6 +92,7 @@ export default function Header() {
             )}
 
             {/* ================= DESKTOP HEADER ================= */}
+
             <header
                 className={`hidden lg:flex items-center justify-between py-4 px-6 text-white max-w-6xl mx-auto sticky top-0 z-40 transition-all duration-300
                 ${
@@ -94,7 +102,7 @@ export default function Header() {
                 }`}
             >
                 <a
-                    href="/"
+                    href="#hero"
                     className="transition-transform duration-300 hover:scale-[1.03]"
                 >
                     <h1 className="font-clash font-bold text-xl relative group">
@@ -108,19 +116,13 @@ export default function Header() {
 
                 <nav>
                     <ul className="flex items-center gap-x-6 text-sm font-satoshi">
-                        {[
-                            'Accueil',
-                            'À propos',
-                            'Projets',
-                            'CV',
-                            'Contact',
-                        ].map((item, i) => (
+                        {links.map((item, i) => (
                             <li key={i}>
                                 <a
-                                    href="/"
-                                    className="px-3 py-2 rounded-md transition-all duration-150 hover:bg-orange-400/10 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
+                                    href={item.href}
+                                    className="px-3 py-2 rounded-md transition-all duration-150 transform hover:bg-orange-400/10 hover:-translate-y-1 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
                                 >
-                                    {item}
+                                    {item.name}
                                 </a>
                             </li>
                         ))}

@@ -3,8 +3,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function Hero() {
     return (
-        <section className="min-h-[90vh] flex items-center">
-            <article className="flex flex-col lg:flex-row items-center justify-between gap-10 max-w-6xl mx-auto p-4 lg:p-8">
+        <section id="hero" className="min-h-[90vh] flex items-center">
+            <article className="flex flex-col pt-20 lg:flex-row items-center justify-between gap-10 max-w-6xl mx-auto p-4 lg:p-8">
                 {/* TEXTE */}
                 <div className="lg:w-1/2 font-clash text-4xl lg:text-6xl text-center lg:text-left">
                     <h1 className="p-2">
@@ -26,13 +26,17 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex justify-center lg:justify-start gap-4 p-4">
-                        <button className="bg-orange-400 text-white text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-500 transition hover">
-                            Mes projets
-                        </button>
+                        <a href="#projets">
+                            <button className="bg-orange-400 text-white text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-500 transition hover">
+                                Mes projets
+                            </button>
+                        </a>
 
-                        <button className="border border-orange-400 text-orange-400 text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-400/10 hover:text-orange-400 transition hover">
-                            Mon CV
-                        </button>
+                        <a href="#cv">
+                            <button className="border border-orange-400 text-orange-400 text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-400/10 hover:text-orange-400 transition hover">
+                                Mon CV
+                            </button>
+                        </a>
                     </div>
                 </div>
                 <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
