@@ -2,6 +2,7 @@ import Header from './components/sections/Header';
 import Hero from './components/sections/Hero';
 import A_propos from './components/sections/A_propos';
 import Projects from './components/sections/Projects';
+import Cv from './components/sections/Cv';
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Hero />
             <A_propos />
             <Projects />
+            <Cv />
         </main>
     );
 }
