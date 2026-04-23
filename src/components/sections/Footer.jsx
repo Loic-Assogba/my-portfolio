@@ -105,7 +105,7 @@ export default function Footer() {
                     </p>
 
                     <p className="hover:text-orange-400 transition cursor-default">
-                        Made with React & Tailwind
+                        Réalisé avec React & Tailwind
                     </p>
                 </div>
             </div>

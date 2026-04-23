@@ -48,7 +48,7 @@ export default function A_propos() {
 
                     {/* COMPÉTENCES */}
                     <div className="grid grid-cols-2 gap-4 md:gap-6">
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
                                 6+
                             </h3>
@@ -57,7 +57,7 @@ export default function A_propos() {
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
                                 1+
                             </h3>
@@ -66,7 +66,7 @@ export default function A_propos() {
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
                                 5+
                             </h3>
@@ -75,7 +75,7 @@ export default function A_propos() {
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
                                 100%
                             </h3>
