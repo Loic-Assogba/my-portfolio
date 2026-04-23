@@ -44,7 +44,7 @@ export default function CV() {
                      justify-center"
                         >
                             <a
-                                href="/cv.pdf"
+                                href="/cv-loicassogba.pdf"
                                 download
                                 className="inline-block  bg-orange-400 text-black px-5 py-3 rounded-md font-semibold hover:bg-orange-500 active:scale-95 transition"
                             >
