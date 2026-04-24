@@ -41,9 +41,11 @@ export default function A_propos() {
                             fonctionnelles en utilisant des technologies
                             modernes comme React, Tailwind CSS et JavaScript.
                         </p>
-                        <button className="bg-orange-400 text-white px-5 py-2 rounded-md hover:bg-orange-500 transition button-click">
-                            Télécharger mon CV
-                        </button>
+                        <a href="#cv">
+                            <button className="bg-orange-400 text-white px-5 py-2 rounded-md hover:bg-orange-500 transition button-click">
+                                Télécharger mon CV
+                            </button>
+                        </a>
                     </div>
 
                     {/* COMPÉTENCES */}
