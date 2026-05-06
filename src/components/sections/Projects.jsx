@@ -1,3 +1,7 @@
+import Button from '../ui/Button';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+
 export default function Projects() {
     const projects = [
         {
@@ -53,7 +57,14 @@ export default function Projects() {
     ];
 
     return (
-        <section id="projets" className="max-w-6xl mx-auto px-6 py-20 pb-10">
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: false }}
+            id="projets"
+            className="max-w-6xl mx-auto px-6 py-20 pb-10"
+        >
             <h2 className="text-3xl md:text-4xl font-bold font-clash text-white mb-4 text-center">
                 Mes{' '}
                 <span className="inline-block text-orange-400 animate-float">
@@ -99,6 +110,6 @@ export default function Projects() {
                     </div>
                 ))}
             </div>
-        </section>
+        </motion.section>
     );
 }

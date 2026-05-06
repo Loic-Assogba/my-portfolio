@@ -1,9 +1,18 @@
 import Button from '../ui/Button';
 import { ArrowUpRight } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 
 export default function A_propos() {
     return (
-        <section id="a_propos" className="min-h-[90vh] bg-gray-950">
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: false }}
+            id="a_propos"
+            className="min-h-[90vh] bg-gray-950"
+        >
             <h1 className="font-clash text-3xl font-bold pt-20 lg:text-6xl text-center w-full p-4 md:text-4xl mb-6">
                 À{' '}
                 <span className="inline-block text-orange-400 animate-float">
@@ -88,6 +97,6 @@ export default function A_propos() {
                     </div>
                 </div>
             </article>
-        </section>
+        </motion.section>
     );
 }

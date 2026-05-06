@@ -1,9 +1,17 @@
 import Button from '../ui/Button';
-import { ArrowUpRight } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
-        <section id="hero" className="min-h-[90vh] flex items-center">
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: false }}
+            id="hero"
+            className="min-h-[90vh] flex items-center"
+        >
             <article className="flex flex-col pt-20 lg:flex-row items-center justify-between gap-10 max-w-6xl mx-auto p-4 lg:p-8">
                 {/* TEXTE */}
                 <div className="lg:w-1/2 font-clash text-4xl lg:text-6xl text-center lg:text-left">
@@ -51,6 +59,6 @@ export default function Hero() {
                     />
                 </div>{' '}
             </article>
-        </section>
+        </motion.section>
     );
 }

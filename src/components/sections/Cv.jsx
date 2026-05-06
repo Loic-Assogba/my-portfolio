@@ -1,6 +1,17 @@
+import Button from '../ui/Button';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+
 export default function CV() {
     return (
-        <section id="cv" className="bg-gray-950">
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: false }}
+            id="cv"
+            className="bg-gray-950"
+        >
             <article className="max-w-6xl mx-auto px-6 py-10 text-white">
                 {/* TITLE */}
                 <h2 className="text-3xl text-center py-10 md:text-4xl font-clash font-bold mb-10 animate-fade-in">
@@ -71,6 +82,6 @@ export default function CV() {
                     </div>
                 </div>
             </article>
-        </section>
+        </motion.section>
     );
 }

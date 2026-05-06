@@ -1,6 +1,14 @@
+import Button from '../ui/Button';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+
 export default function Contact() {
     return (
-        <section
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: false }}
             id="contact"
             className="max-w-6xl mx-auto px-4 pb-4 pt-20 sm:px-6 lg:px-8 py-16 lg:py-24 text-white"
         >
@@ -102,6 +110,6 @@ export default function Contact() {
                     </button>
                 </form>
             </div>
-        </section>
+        </motion.section>
     );
 }
