@@ -60,7 +60,11 @@ export default function Contact() {
                 </div>
 
                 {/* RIGHT FORM */}
-                <form
+                <motion.form
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9 }}
+                    viewport={{ once: false }}
                     className="space-y-4 animate-fade-in w-full"
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -108,7 +112,7 @@ export default function Contact() {
                     >
                         Envoyer sur WhatsApp
                     </button>
-                </form>
+                </motion.form>
             </div>
         </motion.section>
     );
