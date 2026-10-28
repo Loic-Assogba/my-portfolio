@@ -47,7 +47,13 @@ export default function Hero() {
                         </a>
                     </div>
                 </div>
-                <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+                <motion.div
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9 }}
+                    viewport={{ once: false }}
+                    className="lg:w-1/2 flex justify-center lg:justify-end relative"
+                >
                     {/* halo animé */}
                     <div className="absolute w-72 h-72 bg-orange-400/30 rounded-full blur-3xl animate-pulse"></div>
 
@@ -57,7 +63,7 @@ export default function Hero() {
                         alt="Profil"
                         className="relative w-64 h-80 object-cover rounded-full border-4 border-orange-400 lg:w-80 lg:h-96"
                     />
-                </div>{' '}
+                </motion.div>{' '}
             </article>
         </motion.section>
     );
