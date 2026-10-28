@@ -225,3 +225,7 @@ html {
         left: 100%;
     }
 }
+
+html {
+    scroll-behavior: smooth;
+}
