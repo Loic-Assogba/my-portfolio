@@ -2,8 +2,12 @@ import Button from '../ui/Button';
 import { ArrowUpRight } from 'lucide-react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import Counter from '../Counter';
+import { useState } from 'react';
 
 export default function A_propos() {
+    const [trigger, setTrigger] = useState(false);
+
     return (
         <motion.section
             initial={{ opacity: 0, y: 40 }}
@@ -58,43 +62,72 @@ export default function A_propos() {
                     </div>
 
                     {/* COMPÉTENCES */}
-                    <div className="grid grid-cols-2 gap-4 md:gap-6">
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
+
+                    <motion.div
+                        onViewportEnter={() => setTrigger(true)}
+                        onViewportLeave={() => setTrigger(false)}
+                        viewport={{ amount: 0.3 }}
+                        initial={{ opacity: 0, x: 100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.9 }}
+                        className="grid lg:grid-cols-2 gap-10 items-center"
+                    >
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
-                                6+
+                                <Counter
+                                    key={trigger ? 'on' : 'off'}
+                                    target={1}
+                                    trigger={trigger}
+                                    suffix="+"
+                                />
                             </h3>
                             <p className="text-gray-400 text-xs md:text-sm">
                                 Projets réalisés
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
-                                1+
+                                <Counter
+                                    key={trigger ? 'on' : 'off'}
+                                    target={1}
+                                    trigger={trigger}
+                                    suffix="+"
+                                />
                             </h3>
                             <p className="text-gray-400 text-xs md:text-sm">
                                 Année d'expérience
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
-                                5+
+                                <Counter
+                                    key={trigger ? 'on' : 'off'}
+                                    target={5}
+                                    trigger={trigger}
+                                    suffix="+"
+                                />
                             </h3>
                             <p className="text-gray-400 text-xs md:text-sm">
                                 Technologies
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover hover:scale-105 transition">
+                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
                             <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
-                                100%
+                                <Counter
+                                    key={trigger ? 'on' : 'off'}
+                                    target={100}
+                                    trigger={trigger}
+                                    suffix="%"
+                                />
                             </h3>
                             <p className="text-gray-400 text-xs md:text-sm">
                                 Passion
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </article>
         </motion.section>
