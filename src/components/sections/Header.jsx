@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
     const links = [
         { name: 'Accueil', href: '#hero' },
@@ -13,74 +14,163 @@ export default function Header() {
         { name: 'Contact', href: '#contact' },
     ];
 
+    // Fermer le menu
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
+    // Détection du sens de défilement
     useEffect(() => {
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
+            const currentScrollY = Math.max(0, window.scrollY);
+            const difference = currentScrollY - lastScrollY;
+
+            // Modifier l'apparence du header
+            setIsScrolled(currentScrollY > 20);
+
+            // Toujours afficher le header en haut de la page
+            if (currentScrollY <= 20) {
+                setIsHeaderVisible(true);
+            } else if (difference > 0) {
+                // Défilement vers le bas
+                setIsHeaderVisible(false);
+            } else if (difference < 0) {
+                // Défilement vers le haut
+                setIsHeaderVisible(true);
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, {
+            passive: true,
+        });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Fermer le menu avec la touche Échap
+    useEffect(() => {
+        if (!isMenuOpen) return;
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                closeMenu();
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        document.addEventListener('keydown', handleEscape);
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [isMenuOpen]);
+
+    // Bloquer le défilement derrière le menu mobile
+    useEffect(() => {
+        if (!isMenuOpen) return;
+
+        const previousOverflow = document.body.style.overflow;
+
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [isMenuOpen]);
 
     return (
         <>
-            {/* ================= MOBILE HEADER ================= */}
+            {/* ================= HEADER PRINCIPAL ================= */}
 
             <header
-                className={`flex items-center justify-between text-white p-4 lg:hidden transition-all duration-300 sticky top-0 z-40
-                ${
-                    isScrolled
-                        ? 'bg-gray-950/80 backdrop-blur-md rounded-xl m-2 shadow-lg'
-                        : 'bg-gray-950'
-                }`}
+                className={`
+                    fixed inset-x-0 top-0 z-50
+                    w-full
+                    transition-all duration-300 ease-in-out
+                    ${
+                        isHeaderVisible || isMenuOpen
+                            ? 'translate-y-0 opacity-100 pointer-events-auto'
+                            : '-translate-y-full opacity-0 pointer-events-none'
+                    }
+                    ${
+                        isScrolled
+                            ? 'bg-gray-950/95 backdrop-blur-xl shadow-lg border-b border-white/10'
+                            : 'bg-gray-950/80 backdrop-blur-md'
+                    }
+                `}
             >
-                <a
-                    href="#hero"
-                    className="transition-transform duration-300 hover:scale-[1.03]"
+                <div
+                    className="
+                        mx-auto w-full max-w-6xl
+                        flex items-center justify-between
+                        gap-4
+                        px-4 sm:px-6 lg:px-8
+                        h-16 sm:h-[72px]
+                    "
                 >
-                    <h1 className="font-clash font-bold text-lg relative group">
-                        <a href="#hero">
-                            <span className="inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
-                                Loïc Assogba
-                            </span>
-                        </a>
+                    {/* LOGO */}
 
-                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
-                    </h1>
-                </a>
-
-                <button
-                    onClick={() => setIsMenuOpen(true)}
-                    className="p-2 rounded-md hover:bg-gray-800 transition transform active:scale-90"
-                >
-                    <Menu className="w-5 h-5" />
-                </button>
-            </header>
-
-            {/* ================= MOBILE MENU ================= */}
-
-            {isMenuOpen && (
-                <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-                    <nav className="absolute top-0 right-0 w-3/4 h-min m-2 rounded-2xl bg-gray-950 text-white p-6 shadow-2xl animate-slide-in">
-                        <button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="flex mb-8 p-2 rounded-md hover:bg-gray-800 transition transform active:scale-95"
+                    <a
+                        href="#hero"
+                        onClick={closeMenu}
+                        aria-label="Loïc Assogba - Accueil"
+                        className="group relative shrink-0"
+                    >
+                        <span
+                            className="
+                                font-clash font-bold
+                                text-lg sm:text-xl
+                                whitespace-nowrap
+                                bg-gradient-to-r
+                                from-orange-400 via-orange-300 to-orange-500
+                                bg-clip-text text-transparent
+                                shine
+                            "
                         >
-                            <X className="w-5 h-5" />
-                        </button>
+                            Loïc Assogba
+                        </span>
 
-                        <ul className="space-y-6 text-sm font-satoshi">
-                            {links.map((item, i) => (
-                                <li key={i}>
+                        <span
+                            className="
+                                absolute left-0 -bottom-1
+                                h-[2px] w-0
+                                bg-orange-400
+                                transition-all duration-300
+                                group-hover:w-full
+                            "
+                        />
+                    </a>
+
+                    {/* NAVIGATION DESKTOP */}
+
+                    <nav
+                        className="hidden lg:block"
+                        aria-label="Navigation principale"
+                    >
+                        <ul
+                            className="
+                                flex items-center
+                                gap-x-2 xl:gap-x-4
+                                text-sm font-satoshi
+                            "
+                        >
+                            {links.map((item) => (
+                                <li key={item.href}>
                                     <a
                                         href={item.href}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="block px-3 py-2 rounded-md transition-all duration-150 hover:bg-orange-400/10 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
+                                        className="
+                                            block px-3 py-2 rounded-lg
+                                            whitespace-nowrap
+                                            transition-all duration-200
+                                            hover:bg-orange-400/10
+                                            hover:text-orange-400
+                                            active:scale-95
+                                        "
                                     >
                                         {item.name}
                                     </a>
@@ -88,47 +178,139 @@ export default function Header() {
                             ))}
                         </ul>
                     </nav>
+
+                    {/* BOUTON MENU MOBILE */}
+
+                    <button
+                        type="button"
+                        onClick={() => setIsMenuOpen(true)}
+                        aria-label="Ouvrir le menu"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-navigation"
+                        className="
+                            lg:hidden shrink-0
+                            flex items-center justify-center
+                            w-11 h-11 rounded-xl
+                            text-white
+                            hover:bg-white/10
+                            active:scale-95
+                            transition-all duration-200
+                        "
+                    >
+                        <Menu size={24} />
+                    </button>
+                </div>
+            </header>
+
+            {/* ================= MENU MOBILE ================= */}
+
+            {isMenuOpen && (
+                <div
+                    className="
+                        fixed inset-0 z-[60]
+                        lg:hidden
+                        w-full
+                        bg-black/70 backdrop-blur-sm
+                    "
+                    onClick={closeMenu}
+                >
+                    <nav
+                        id="mobile-navigation"
+                        aria-label="Navigation mobile"
+                        className="
+                            absolute inset-y-0 right-0
+                            w-[85%] max-w-[360px]
+                            overflow-y-auto overflow-x-hidden
+                            bg-gray-950 text-white
+                            border-l border-white/10
+                            shadow-2xl
+                            p-5 sm:p-7
+                            animate-slide-in
+                        "
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        {/* EN-TÊTE DU MENU */}
+
+                        <div className="flex items-center justify-between gap-3 mb-10">
+                            <a
+                                href="#hero"
+                                onClick={closeMenu}
+                                className="
+                                    min-w-0
+                                    font-clash font-bold text-lg
+                                    whitespace-nowrap
+                                    bg-gradient-to-r
+                                    from-orange-400 via-orange-300 to-orange-500
+                                    bg-clip-text text-transparent
+                                "
+                            >
+                                Loïc Assogba
+                            </a>
+
+                            <button
+                                type="button"
+                                onClick={closeMenu}
+                                aria-label="Fermer le menu"
+                                className="
+                                    shrink-0
+                                    flex items-center justify-center
+                                    w-11 h-11 rounded-xl
+                                    text-white
+                                    hover:bg-white/10
+                                    hover:text-orange-400
+                                    active:scale-95
+                                    transition-all duration-200
+                                "
+                            >
+                                <X size={24} />
+                            </button>
+                        </div>
+
+                        {/* LIENS DE NAVIGATION */}
+
+                        <ul className="flex flex-col gap-3 font-satoshi">
+                            {links.map((item, index) => (
+                                <li
+                                    key={item.href}
+                                    style={{
+                                        animationDelay: `${index * 50}ms`,
+                                    }}
+                                    className="animate-slide-in"
+                                >
+                                    <a
+                                        href={item.href}
+                                        onClick={closeMenu}
+                                        className="
+                                            flex items-center
+                                            min-h-12 px-4 py-3
+                                            rounded-xl
+                                            text-base text-gray-200
+                                            transition-all duration-200
+                                            hover:bg-orange-400/10
+                                            hover:text-orange-400
+                                            active:scale-[0.98]
+                                        "
+                                    >
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* PIED DU MENU */}
+
+                        <div className="mt-10 pt-6 border-t border-white/10">
+                            <p className="text-xs text-gray-500">
+                                Portfolio de Loïc Assogba
+                            </p>
+
+                            <p className="mt-2 text-sm text-orange-400">
+                                Développeur Web Full-Stack
+                            </p>
+                        </div>
+                    </nav>
                 </div>
             )}
-
-            {/* ================= DESKTOP HEADER ================= */}
-
-            <header
-                className={`hidden lg:flex items-center justify-between py-4 px-6 text-white max-w-6xl mx-auto sticky top-0 z-40 transition-all duration-300
-                ${
-                    isScrolled
-                        ? 'bg-gray-900/80 backdrop-blur-md rounded-2xl mt-3 shadow-xl border border-white/10'
-                        : 'bg-gray-900'
-                }`}
-            >
-                <a
-                    href="#hero"
-                    className="transition-transform duration-300 hover:scale-[1.03]"
-                >
-                    <h1 className="font-clash font-bold text-xl relative group">
-                        <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
-                            Loïc Assogba
-                        </span>
-
-                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
-                    </h1>
-                </a>
-
-                <nav>
-                    <ul className="flex items-center gap-x-6 text-sm font-satoshi">
-                        {links.map((item, i) => (
-                            <li key={i}>
-                                <a
-                                    href={item.href}
-                                    className="px-3 py-2 rounded-md transition-all duration-150 transform hover:bg-orange-400/10 hover:-translate-y-1 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
-                                >
-                                    {item.name}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            </header>
         </>
     );
 }
