@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
     const links = [
         { name: 'Accueil', href: '#hero' },
@@ -19,30 +18,13 @@ export default function Header() {
         setIsMenuOpen(false);
     };
 
-    // Détection du sens de défilement
+    // Détection du défilement
     useEffect(() => {
-        let lastScrollY = window.scrollY;
-
         const handleScroll = () => {
-            const currentScrollY = Math.max(0, window.scrollY);
-            const difference = currentScrollY - lastScrollY;
-
-            // Modifier l'apparence du header
-            setIsScrolled(currentScrollY > 20);
-
-            // Toujours afficher le header en haut de la page
-            if (currentScrollY <= 20) {
-                setIsHeaderVisible(true);
-            } else if (difference > 0) {
-                // Défilement vers le bas
-                setIsHeaderVisible(false);
-            } else if (difference < 0) {
-                // Défilement vers le haut
-                setIsHeaderVisible(true);
-            }
-
-            lastScrollY = currentScrollY;
+            setIsScrolled(window.scrollY > 20);
         };
+
+        handleScroll();
 
         window.addEventListener('scroll', handleScroll, {
             passive: true,
@@ -53,7 +35,7 @@ export default function Header() {
         };
     }, []);
 
-    // Fermer le menu avec la touche Échap
+    // Fermer le menu avec Échap
     useEffect(() => {
         if (!isMenuOpen) return;
 
@@ -70,7 +52,7 @@ export default function Header() {
         };
     }, [isMenuOpen]);
 
-    // Bloquer le défilement derrière le menu mobile
+    // Bloquer le défilement de la page derrière le menu
     useEffect(() => {
         if (!isMenuOpen) return;
 
@@ -90,13 +72,8 @@ export default function Header() {
             <header
                 className={`
                     fixed inset-x-0 top-0 z-50
-                    w-full
-                    transition-all duration-300 ease-in-out
-                    ${
-                        isHeaderVisible || isMenuOpen
-                            ? 'translate-y-0 opacity-100 pointer-events-auto'
-                            : '-translate-y-full opacity-0 pointer-events-none'
-                    }
+                    w-full max-w-full
+                    transition-colors duration-300
                     ${
                         isScrolled
                             ? 'bg-gray-950/95 backdrop-blur-xl shadow-lg border-b border-white/10'
@@ -106,11 +83,9 @@ export default function Header() {
             >
                 <div
                     className="
-                        mx-auto w-full max-w-6xl
-                        flex items-center justify-between
-                        gap-4
-                        px-4 sm:px-6 lg:px-8
-                        h-16 sm:h-[72px]
+                        mx-auto flex h-16 w-full max-w-6xl
+                        items-center justify-between gap-4
+                        px-4 sm:h-[72px] sm:px-6 lg:px-8
                     "
                 >
                     {/* LOGO */}
@@ -123,9 +98,9 @@ export default function Header() {
                     >
                         <span
                             className="
+                                whitespace-nowrap
                                 font-clash font-bold
                                 text-lg sm:text-xl
-                                whitespace-nowrap
                                 bg-gradient-to-r
                                 from-orange-400 via-orange-300 to-orange-500
                                 bg-clip-text text-transparent
@@ -164,8 +139,8 @@ export default function Header() {
                                     <a
                                         href={item.href}
                                         className="
-                                            block px-3 py-2 rounded-lg
-                                            whitespace-nowrap
+                                            block whitespace-nowrap
+                                            rounded-lg px-3 py-2
                                             transition-all duration-200
                                             hover:bg-orange-400/10
                                             hover:text-orange-400
@@ -183,8 +158,10 @@ export default function Header() {
 
                     <button
                         type="button"
-                        onClick={() => setIsMenuOpen(true)}
-                        aria-label="Ouvrir le menu"
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        aria-label={
+                            isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'
+                        }
                         aria-expanded={isMenuOpen}
                         aria-controls="mobile-navigation"
                         className="
@@ -197,7 +174,7 @@ export default function Header() {
                             transition-all duration-200
                         "
                     >
-                        <Menu size={24} />
+                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </header>
@@ -205,36 +182,46 @@ export default function Header() {
             {/* ================= MENU MOBILE ================= */}
 
             {isMenuOpen && (
-                <div
-                    className="
-                        fixed inset-0 z-[60]
-                        lg:hidden
-                        w-full
-                        bg-black/70 backdrop-blur-sm
-                    "
-                    onClick={closeMenu}
-                >
+                <>
+                    {/* FOND TRANSPARENT */}
+
+                    <div
+                        className="
+                            fixed inset-0 z-40
+                            lg:hidden
+                        "
+                        onClick={closeMenu}
+                        aria-hidden="true"
+                    />
+
+                    {/* PANNEAU DU MENU */}
+
                     <nav
                         id="mobile-navigation"
                         aria-label="Navigation mobile"
                         className="
-                            absolute inset-y-0 right-0
-                            w-[85%] max-w-[360px]
+                            fixed right-3 top-[72px] z-[60]
+                            w-[min(18rem,calc(100vw-1.5rem))]
+                            h-auto max-h-[calc(100dvh-88px)]
                             overflow-y-auto overflow-x-hidden
+                            rounded-2xl
+                            border border-white/10
                             bg-gray-950 text-white
-                            border-l border-white/10
                             shadow-2xl
-                            p-5 sm:p-7
+                            p-4
+                            lg:hidden
                             animate-slide-in
                         "
-                        onClick={(event) => event.stopPropagation()}
                     >
                         {/* EN-TÊTE DU MENU */}
 
-                        <div className="flex items-center justify-between gap-3 mb-10">
-                            <a
-                                href="#hero"
-                                onClick={closeMenu}
+                        <div
+                            className="
+                                flex items-center justify-between
+                                gap-3 mb-4
+                            "
+                        >
+                            <span
                                 className="
                                     min-w-0
                                     font-clash font-bold text-lg
@@ -245,7 +232,7 @@ export default function Header() {
                                 "
                             >
                                 Loïc Assogba
-                            </a>
+                            </span>
 
                             <button
                                 type="button"
@@ -254,21 +241,20 @@ export default function Header() {
                                 className="
                                     shrink-0
                                     flex items-center justify-center
-                                    w-11 h-11 rounded-xl
+                                    w-9 h-9 rounded-lg
                                     text-white
                                     hover:bg-white/10
                                     hover:text-orange-400
-                                    active:scale-95
                                     transition-all duration-200
                                 "
                             >
-                                <X size={24} />
+                                <X size={21} />
                             </button>
                         </div>
 
                         {/* LIENS DE NAVIGATION */}
 
-                        <ul className="flex flex-col gap-3 font-satoshi">
+                        <ul className="flex flex-col gap-1 font-satoshi">
                             {links.map((item, index) => (
                                 <li
                                     key={item.href}
@@ -282,7 +268,7 @@ export default function Header() {
                                         onClick={closeMenu}
                                         className="
                                             flex items-center
-                                            min-h-12 px-4 py-3
+                                            min-h-11 px-4 py-3
                                             rounded-xl
                                             text-base text-gray-200
                                             transition-all duration-200
@@ -299,17 +285,17 @@ export default function Header() {
 
                         {/* PIED DU MENU */}
 
-                        <div className="mt-10 pt-6 border-t border-white/10">
+                        <div className="mt-3 pt-3 border-t border-white/10 px-4">
                             <p className="text-xs text-gray-500">
                                 Portfolio de Loïc Assogba
                             </p>
 
-                            <p className="mt-2 text-sm text-orange-400">
+                            <p className="mt-1 text-sm text-orange-400">
                                 Développeur Web Full-Stack
                             </p>
                         </div>
                     </nav>
-                </div>
+                </>
             )}
         </>
     );
