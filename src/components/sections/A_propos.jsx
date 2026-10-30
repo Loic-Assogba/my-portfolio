@@ -70,10 +70,13 @@ export default function A_propos() {
                         initial={{ opacity: 0, x: 100 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.9 }}
-                        className="grid lg:grid-cols-2 gap-10 items-center"
+                        className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-5 lg:gap-10 items-stretch"
                     >
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
-                            <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
+                        {/* Projets */}
+                        <div className="group relative overflow-hidden bg-gray-900 p-4 sm:p-6 rounded-2xl text-center border border-white/5 hover:border-orange-400/30 transition-all duration-300 hover:-translate-y-1">
+                            <div className="absolute -right-8 -top-8 w-20 h-20 bg-orange-400/5 rounded-full blur-2xl group-hover:bg-orange-400/15 transition-all" />
+
+                            <h3 className="text-3xl sm:text-4xl font-bold text-orange-400 relative">
                                 <Counter
                                     key={trigger ? 'on' : 'off'}
                                     target={6}
@@ -81,13 +84,17 @@ export default function A_propos() {
                                     suffix="+"
                                 />
                             </h3>
-                            <p className="text-gray-400 text-xs md:text-sm">
+
+                            <p className="text-gray-400 text-xs sm:text-sm mt-2">
                                 Projets réalisés
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
-                            <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
+                        {/* Expérience */}
+                        <div className="group relative overflow-hidden bg-gray-900 p-4 sm:p-6 rounded-2xl text-center border border-white/5 hover:border-orange-400/30 transition-all duration-300 hover:-translate-y-1">
+                            <div className="absolute -right-8 -top-8 w-20 h-20 bg-orange-400/5 rounded-full blur-2xl group-hover:bg-orange-400/15 transition-all" />
+
+                            <h3 className="text-3xl sm:text-4xl font-bold text-orange-400 relative">
                                 <Counter
                                     key={trigger ? 'on' : 'off'}
                                     target={2}
@@ -95,13 +102,17 @@ export default function A_propos() {
                                     suffix="+"
                                 />
                             </h3>
-                            <p className="text-gray-400 text-xs md:text-sm">
-                                Année d'expérience
+
+                            <p className="text-gray-400 text-xs sm:text-sm mt-2">
+                                Années d'expérience
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
-                            <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
+                        {/* Technologies */}
+                        <div className="group relative overflow-hidden bg-gray-900 p-4 sm:p-6 rounded-2xl text-center border border-white/5 hover:border-orange-400/30 transition-all duration-300 hover:-translate-y-1">
+                            <div className="absolute -right-8 -top-8 w-20 h-20 bg-orange-400/5 rounded-full blur-2xl group-hover:bg-orange-400/15 transition-all" />
+
+                            <h3 className="text-3xl sm:text-4xl font-bold text-orange-400 relative">
                                 <Counter
                                     key={trigger ? 'on' : 'off'}
                                     target={9}
@@ -109,13 +120,17 @@ export default function A_propos() {
                                     suffix="+"
                                 />
                             </h3>
-                            <p className="text-gray-400 text-xs md:text-sm">
+
+                            <p className="text-gray-400 text-xs sm:text-sm mt-2">
                                 Technologies
                             </p>
                         </div>
 
-                        <div className="bg-gray-900 p-5 md:p-6 rounded-xl text-center hover:scale-105 transition">
-                            <h3 className="text-2xl md:text-3xl font-bold text-orange-400">
+                        {/* Passion */}
+                        <div className="group relative overflow-hidden bg-gray-900 p-4 sm:p-6 rounded-2xl text-center border border-white/5 hover:border-orange-400/30 transition-all duration-300 hover:-translate-y-1">
+                            <div className="absolute -right-8 -top-8 w-20 h-20 bg-orange-400/5 rounded-full blur-2xl group-hover:bg-orange-400/15 transition-all" />
+
+                            <h3 className="text-3xl sm:text-4xl font-bold text-orange-400 relative">
                                 <Counter
                                     key={trigger ? 'on' : 'off'}
                                     target={100}
@@ -123,7 +138,8 @@ export default function A_propos() {
                                     suffix="%"
                                 />
                             </h3>
-                            <p className="text-gray-400 text-xs md:text-sm">
+
+                            <p className="text-gray-400 text-xs sm:text-sm mt-2">
                                 Passion
                             </p>
                         </div>
