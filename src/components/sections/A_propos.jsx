@@ -39,25 +39,42 @@ export default function A_propos() {
                     {/* TEXTE */}
                     <div className="text-center md:text-left">
                         <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
-                            Je m'appelle{' '}
+                            Je suis{' '}
                             <span className="text-orange-400 font-medium">
                                 Loïc Assogba
                             </span>
-                            , développeur web full stack en formation à
-                            FuturCraft Institut. Je suis passionné par la
-                            création d'expériences digitales modernes et
-                            performantes.
+                            , développeur Web Full-Stack en formation à
+                            FuturCraft Institut et actuellement engagé dans un
+                            parcours d'apprentissage en cybersécurité. Passionné
+                            par le numérique, je m'intéresse autant à la
+                            création d'applications web qu'à la sécurité des
+                            environnements informatiques.
+                        </p>
+
+                        <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
+                            Mon parcours m'a permis d'explorer plusieurs
+                            technologies, notamment React, Next.js, JavaScript,
+                            PHP, MySQL et Tailwind CSS. Je développe également
+                            mes connaissances en réseaux informatiques,
+                            administration des systèmes et sécurité
+                            informatique.
                         </p>
 
                         <p className="text-gray-400 leading-relaxed mb-6 text-sm md:text-base">
-                            J'aime transformer des idées en applications web
-                            fonctionnelles en utilisant des technologies
-                            modernes comme React, Tailwind CSS et JavaScript.
+                            Curieux, persévérant et orienté vers la pratique,
+                            j'aime relever de nouveaux défis, expérimenter et
+                            transformer des idées en solutions numériques
+                            utiles. Mon ambition est de développer une expertise
+                            qui allie développement Full-Stack et cybersécurité
+                            afin de concevoir des applications performantes et
+                            sécurisées.
                         </p>
-                        <a href="#cv">
-                            <button className="bg-orange-400 text-white px-5 py-2 rounded-md hover:bg-orange-500 transition button-click">
-                                Télécharger mon CV
-                            </button>
+
+                        <a
+                            href="#cv"
+                            className="inline-block bg-orange-400 text-white px-5 py-2.5 rounded-md hover:bg-orange-500 transition button-click"
+                        >
+                            Télécharger mon CV
                         </a>
                     </div>
 
