@@ -32,43 +32,45 @@ export default function A_propos() {
                     <img
                         src="/about.jpeg"
                         alt="A propos"
-                        className="relative w-64 h-80 object-cover rounded-full border-4 border-orange-400 lg:w-80 lg:h-96"
+                        className="relative w-64 h-80 object-cover rounded-full border-4 border-orange-400 lg:w-64 lg:h-96"
                     />
                 </div>{' '}
                 <div className="max-w-6xl mx-auto px-4 py-4 grid gap-10 md:grid-cols-2 items-center">
                     {/* TEXTE */}
-                    <div className="text-center md:text-left">
-                        <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
-                            Je suis{' '}
-                            <span className="text-orange-400 font-medium">
-                                Loïc Assogba
-                            </span>
-                            , développeur Web Full-Stack en formation à
-                            FuturCraft Institut et actuellement engagé dans un
-                            parcours d'apprentissage en cybersécurité. Passionné
-                            par le numérique, je m'intéresse autant à la
-                            création d'applications web qu'à la sécurité des
-                            environnements informatiques.
-                        </p>
+                    <div className="text-center md:text-left scale-90">
+                        <div>
+                            <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
+                                Je suis{' '}
+                                <span className="text-orange-400 font-medium">
+                                    Loïc Assogba
+                                </span>
+                                , développeur Web Full-Stack en formation à
+                                FuturCraft Institut et actuellement engagé dans
+                                un parcours d'apprentissage en cybersécurité.
+                                Passionné par le numérique, je m'intéresse
+                                autant à la création d'applications web qu'à la
+                                sécurité des environnements informatiques.
+                            </p>
 
-                        <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
-                            Mon parcours m'a permis d'explorer plusieurs
-                            technologies, notamment React, Next.js, JavaScript,
-                            PHP, MySQL et Tailwind CSS. Je développe également
-                            mes connaissances en réseaux informatiques,
-                            administration des systèmes et sécurité
-                            informatique.
-                        </p>
+                            <p className="text-gray-400 leading-relaxed mb-4 text-sm md:text-base">
+                                Mon parcours m'a permis d'explorer plusieurs
+                                technologies, notamment React, Next.js,
+                                JavaScript, PHP, MySQL et Tailwind CSS. Je
+                                développe également mes connaissances en réseaux
+                                informatiques, administration des systèmes et
+                                sécurité informatique.
+                            </p>
 
-                        <p className="text-gray-400 leading-relaxed mb-6 text-sm md:text-base">
-                            Curieux, persévérant et orienté vers la pratique,
-                            j'aime relever de nouveaux défis, expérimenter et
-                            transformer des idées en solutions numériques
-                            utiles. Mon ambition est de développer une expertise
-                            qui allie développement Full-Stack et cybersécurité
-                            afin de concevoir des applications performantes et
-                            sécurisées.
-                        </p>
+                            <p className="text-gray-400 leading-relaxed mb-6 text-sm md:text-base">
+                                Curieux, persévérant et orienté vers la
+                                pratique, j'aime relever de nouveaux défis,
+                                expérimenter et transformer des idées en
+                                solutions numériques utiles. Mon ambition est de
+                                développer une expertise qui allie développement
+                                Full-Stack et cybersécurité afin de concevoir
+                                des applications performantes et sécurisées.
+                            </p>
+                        </div>
 
                         <a
                             href="#cv"
