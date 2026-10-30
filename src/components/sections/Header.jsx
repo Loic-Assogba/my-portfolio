@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { createPortal } from 'react-dom';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,290 +14,174 @@ export default function Header() {
         { name: 'Contact', href: '#contact' },
     ];
 
-    // Fermer le menu
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
-
-    // Détection du défilement
+    // Gestion du scroll
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
 
-        handleScroll();
+        window.addEventListener('scroll', handleScroll);
 
-        window.addEventListener('scroll', handleScroll, {
-            passive: true,
-        });
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Fermer le menu avec Échap
+    // Fermeture avec la touche Échap
     useEffect(() => {
-        if (!isMenuOpen) return;
-
-        const handleEscape = (event) => {
-            if (event.key === 'Escape') {
-                closeMenu();
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                setIsMenuOpen(false);
             }
         };
 
-        document.addEventListener('keydown', handleEscape);
+        window.addEventListener('keydown', handleEscape);
 
-        return () => {
-            document.removeEventListener('keydown', handleEscape);
-        };
-    }, [isMenuOpen]);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, []);
 
-    // Bloquer le défilement de la page derrière le menu
+    // Empêcher le scroll derrière le menu
     useEffect(() => {
-        if (!isMenuOpen) return;
-
-        const previousOverflow = document.body.style.overflow;
-
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
 
         return () => {
-            document.body.style.overflow = previousOverflow;
+            document.body.style.overflow = '';
         };
     }, [isMenuOpen]);
 
     return (
         <>
-            {/* ================= HEADER PRINCIPAL ================= */}
+            {/* ================= MOBILE HEADER ================= */}
 
             <header
-                className={`
-                    fixed inset-x-0 top-0 z-50
-                    w-full max-w-full
-                    transition-colors duration-300
-                    ${
-                        isScrolled
-                            ? 'bg-gray-950/95 backdrop-blur-xl shadow-lg border-b border-white/10'
-                            : 'bg-gray-950/80 backdrop-blur-md'
-                    }
-                `}
+                className={`relative flex items-center justify-between text-white p-4 lg:hidden transition-all duration-300 sticky top-0 z-40
+                ${
+                    isScrolled
+                        ? 'bg-gray-950/80 backdrop-blur-md rounded-xl m-2 shadow-lg'
+                        : 'bg-gray-950'
+                }`}
             >
-                <div
-                    className="
-                        mx-auto flex h-16 w-full max-w-6xl
-                        items-center justify-between gap-4
-                        px-4 sm:h-[72px] sm:px-6 lg:px-8
-                    "
+                <a
+                    href="#hero"
+                    className="transition-transform duration-300 hover:scale-[1.03]"
                 >
-                    {/* LOGO */}
-
-                    <a
-                        href="#hero"
-                        onClick={closeMenu}
-                        aria-label="Loïc Assogba - Accueil"
-                        className="group relative shrink-0"
-                    >
-                        <span
-                            className="
-                                whitespace-nowrap
-                                font-clash font-bold
-                                text-lg sm:text-xl
-                                bg-gradient-to-r
-                                from-orange-400 via-orange-300 to-orange-500
-                                bg-clip-text text-transparent
-                                shine
-                            "
-                        >
+                    <h1 className="font-clash font-bold text-lg relative group">
+                        <span className="inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
                             Loïc Assogba
                         </span>
 
-                        <span
-                            className="
-                                absolute left-0 -bottom-1
-                                h-[2px] w-0
-                                bg-orange-400
-                                transition-all duration-300
-                                group-hover:w-full
-                            "
-                        />
-                    </a>
+                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
+                    </h1>
+                </a>
 
-                    {/* NAVIGATION DESKTOP */}
-
-                    <nav
-                        className="hidden lg:block"
-                        aria-label="Navigation principale"
-                    >
-                        <ul
-                            className="
-                                flex items-center
-                                gap-x-2 xl:gap-x-4
-                                text-sm font-satoshi
-                            "
-                        >
-                            {links.map((item) => (
-                                <li key={item.href}>
-                                    <a
-                                        href={item.href}
-                                        className="
-                                            block whitespace-nowrap
-                                            rounded-lg px-3 py-2
-                                            transition-all duration-200
-                                            hover:bg-orange-400/10
-                                            hover:text-orange-400
-                                            active:scale-95
-                                        "
-                                    >
-                                        {item.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-
-                    {/* BOUTON MENU MOBILE */}
-
-                    <button
-                        type="button"
-                        onClick={() => setIsMenuOpen((prev) => !prev)}
-                        aria-label={
-                            isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'
-                        }
-                        aria-expanded={isMenuOpen}
-                        aria-controls="mobile-navigation"
-                        className="
-                            lg:hidden shrink-0
-                            flex items-center justify-center
-                            w-11 h-11 rounded-xl
-                            text-white
-                            hover:bg-white/10
-                            active:scale-95
-                            transition-all duration-200
-                        "
-                    >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
+                <button
+                    onClick={() => setIsMenuOpen(true)}
+                    aria-label="Ouvrir le menu"
+                    className="p-2 rounded-md hover:bg-gray-800 transition transform active:scale-90"
+                >
+                    <Menu className="w-5 h-5" />
+                </button>
             </header>
 
-            {/* ================= MENU MOBILE ================= */}
+            {/* ================= MOBILE MENU ================= */}
 
-            {isMenuOpen && (
-                <>
-                    {/* FOND TRANSPARENT */}
-
+            {isMenuOpen &&
+                createPortal(
                     <div
-                        className="
-                            fixed inset-0 z-40
-                            lg:hidden
-                        "
-                        onClick={closeMenu}
-                        aria-hidden="true"
-                    />
-
-                    {/* PANNEAU DU MENU */}
-
-                    <nav
-                        id="mobile-navigation"
-                        aria-label="Navigation mobile"
-                        className="
-                            fixed right-3 top-[72px] z-[60]
-                            w-[min(18rem,calc(100vw-1.5rem))]
-                            h-auto max-h-[calc(100dvh-88px)]
-                            overflow-y-auto overflow-x-hidden
-                            rounded-2xl
-                            border border-white/10
-                            bg-gray-950 text-white
-                            shadow-2xl
-                            p-4
-                            lg:hidden
-                            animate-slide-in
-                        "
+                        className="fixed inset-0 z-[9999] lg:hidden"
+                        onClick={() => setIsMenuOpen(false)}
                     >
-                        {/* EN-TÊTE DU MENU */}
+                        {/* Fond transparent */}
+                        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
 
-                        <div
-                            className="
-                                flex items-center justify-between
-                                gap-3 mb-4
-                            "
+                        {/* Menu */}
+                        <nav
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-4 right-4 w-[min(280px,calc(100vw-32px))] h-fit max-h-[calc(100dvh-32px)] overflow-y-auto rounded-2xl bg-gray-950 text-white p-4 shadow-2xl border border-white/10 animate-slide-in"
                         >
-                            <span
-                                className="
-                                    min-w-0
-                                    font-clash font-bold text-lg
-                                    whitespace-nowrap
-                                    bg-gradient-to-r
-                                    from-orange-400 via-orange-300 to-orange-500
-                                    bg-clip-text text-transparent
-                                "
-                            >
-                                Loïc Assogba
-                            </span>
+                            <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+                                <div>
+                                    <p className="text-xs text-gray-400 font-satoshi">
+                                        Navigation
+                                    </p>
+                                </div>
 
-                            <button
-                                type="button"
-                                onClick={closeMenu}
-                                aria-label="Fermer le menu"
-                                className="
-                                    shrink-0
-                                    flex items-center justify-center
-                                    w-9 h-9 rounded-lg
-                                    text-white
-                                    hover:bg-white/10
-                                    hover:text-orange-400
-                                    transition-all duration-200
-                                "
-                            >
-                                <X size={21} />
-                            </button>
-                        </div>
-
-                        {/* LIENS DE NAVIGATION */}
-
-                        <ul className="flex flex-col gap-1 font-satoshi">
-                            {links.map((item, index) => (
-                                <li
-                                    key={item.href}
-                                    style={{
-                                        animationDelay: `${index * 50}ms`,
-                                    }}
-                                    className="animate-slide-in"
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="p-2 rounded-lg bg-gray-800/70 hover:bg-orange-400/20 hover:text-orange-400 transition-all duration-300"
                                 >
-                                    <a
-                                        href={item.href}
-                                        onClick={closeMenu}
-                                        className="
-                                            flex items-center
-                                            min-h-11 px-4 py-3
-                                            rounded-xl
-                                            text-base text-gray-200
-                                            transition-all duration-200
-                                            hover:bg-orange-400/10
-                                            hover:text-orange-400
-                                            active:scale-[0.98]
-                                        "
-                                    >
-                                        {item.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
 
-                        {/* PIED DU MENU */}
+                            <ul className="space-y-1 font-satoshi">
+                                {links.map((item, i) => (
+                                    <li key={i}>
+                                        <a
+                                            href={item.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="group flex items-center justify-between px-3 py-3 rounded-xl text-sm text-gray-300 transition-all duration-300 hover:bg-orange-400/10 hover:text-orange-400 active:scale-[0.97]"
+                                        >
+                                            <span>{item.name}</span>
 
-                        <div className="mt-3 pt-3 border-t border-white/10 px-4">
-                            <p className="text-xs text-gray-500">
-                                Portfolio de Loïc Assogba
-                            </p>
+                                            <span className="text-xs text-gray-600 group-hover:text-orange-400">
+                                                0{i + 1}
+                                            </span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
 
-                            <p className="mt-1 text-sm text-orange-400">
-                                Développeur Web Full-Stack
-                            </p>
-                        </div>
-                    </nav>
-                </>
-            )}
+                            <div className="mt-3 pt-3 border-t border-white/10 px-4">
+                                <p className="text-xs text-gray-500">
+                                    Loïc Assogba
+                                </p>
+
+                                <p className="mt-1 text-sm text-orange-400">
+                                    Développeur Web Full-Stack
+                                </p>
+                            </div>
+                        </nav>
+                    </div>,
+                    document.body
+                )}
+
+            {/* ================= DESKTOP HEADER ================= */}
+
+            <header
+                className={`hidden lg:flex items-center justify-between py-4 px-6 text-white max-w-6xl mx-auto sticky top-0 z-40 transition-all duration-300
+                ${
+                    isScrolled
+                        ? 'bg-gray-900/80 backdrop-blur-md rounded-2xl mt-3 shadow-xl border border-white/10'
+                        : 'bg-gray-900'
+                }`}
+            >
+                <a
+                    href="#hero"
+                    className="transition-transform duration-300 hover:scale-[1.03]"
+                >
+                    <h1 className="font-clash font-bold text-xl relative group">
+                        <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
+                            Loïc Assogba
+                        </span>
+
+                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
+                    </h1>
+                </a>
+
+                <nav>
+                    <ul className="flex items-center gap-x-6 text-sm font-satoshi">
+                        {links.map((item, i) => (
+                            <li key={i}>
+                                <a
+                                    href={item.href}
+                                    className="px-3 py-2 rounded-md transition-all duration-150 transform hover:bg-orange-400/10 hover:-translate-y-1 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
+                                >
+                                    {item.name}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </header>
         </>
     );
 }
