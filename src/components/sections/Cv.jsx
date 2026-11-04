@@ -94,16 +94,18 @@ export default function CV() {
                         className="relative group animate-fade-in"
                     >
                         {/* CV IMAGE */}
-                        <div className="overflow-hidden rounded-xl border border-white/10 shadow-lg">
+                        <div className="relative overflow-hidden group">
                             <img
-                                src="/cv1.jpg"
+                                src="/cv1.png"
                                 alt="CV Preview"
-                                className="w-full object-cover group-hover:scale-105 transition duration-500"
+                                className="w-full object-cover group-hover:scale-105 transition duration-500 rounded-2xl"
                             />
+
+                            <div className="rounded-2xl absolute inset-0 bg-blue-950/50 group-hover:bg-blue-950/20 backdrop-blur-[1px] transition-all duration-500" />
                         </div>
 
                         {/* BADGE */}
-                        <span className="absolute top-3 right-3 text-xs px-2 py-1 rounded-full bg-orange-400/10 text-orange-400 border border-orange-400/30">
+                        <span className="absolute top-3 right-3 text-xs px-2 py-1 rounded-full bg-orange-400/10 text-orange-400 border border-orange-400/50">
                             PDF
                         </span>
                     </motion.div>
