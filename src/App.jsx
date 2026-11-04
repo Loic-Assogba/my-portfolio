@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import AllProjects from './pages/AllProjects';
 
 import Welcome from './components/sections/Welcome';
 import Header from './components/sections/Header';
@@ -9,6 +12,16 @@ import Cv from './components/sections/Cv';
 import Contact from './components/sections/Contact';
 import Footer from './components/sections/Footer';
 
+function Home() {
+    return (
+        <>
+            {' '}
+            <Hero />
+            <A_propos /> <Projects /> <Cv /> <Contact />
+        </>
+    );
+}
+
 function App() {
     const [loading, setLoading] = useState(true);
     const [showApp, setShowApp] = useState(false);
@@ -16,11 +29,7 @@ function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
-
-            // petit délai pour déclencher animation propre
-            setTimeout(() => {
-                setShowApp(true);
-            }, 100);
+            setShowApp(true);
         }, 4000);
 
         return () => clearTimeout(timer);
@@ -31,7 +40,7 @@ function App() {
     }
 
     return (
-        <main
+        <div
             className={`font-montserrat transition-all duration-1000 ease-out ${
                 showApp
                     ? 'opacity-100 translate-y-0'
@@ -39,13 +48,15 @@ function App() {
             }`}
         >
             <Header />
-            <Hero />
-            <A_propos />
-            <Projects />
-            <Cv />
-            <Contact />
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+
+                <Route path="/tous-les-projets" element={<AllProjects />} />
+            </Routes>
+
             <Footer />
-        </main>
+        </div>
     );
 }
 
