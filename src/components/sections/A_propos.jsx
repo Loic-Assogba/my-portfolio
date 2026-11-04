@@ -116,7 +116,7 @@ export default function A_propos() {
                             <h3 className="text-3xl sm:text-4xl font-bold text-orange-400 relative">
                                 <Counter
                                     key={trigger ? 'on' : 'off'}
-                                    target={2}
+                                    target={1}
                                     trigger={trigger}
                                     suffix="+"
                                 />
