@@ -5,12 +5,37 @@ import { Link } from 'react-router-dom';
 export default function Projects({ showAll = false }) {
     const projects = [
         {
+            title: 'Programme FUTUR',
+            description: 'Site de présentation du Programme FUTUR',
+            image: '/programmefutur.png',
+            tech: 'Next.js • Tailwind ',
+            status: 'Terminé',
+            link: 'https://programmefutur.africa/',
+        },
+        {
+            title: 'Inscription Gala des Leaders & Awards',
+            description:
+                "Plateforme d'inscription pour le Gala des Leaders & Awards.",
+            image: '/gala.png',
+            tech: 'Next.js • Tailwind • PHP • MySQL',
+            status: 'En cours',
+            link: 'https://galadesleaders-inscription.wuaze.com',
+        },
+        {
+            title: 'FuturCradt INSTITUT',
+            description: 'Plareforme complète du FuturCraft INSTITUT.',
+            image: '/futurcraft.png',
+            tech: 'Next.js • Tailwind',
+            status: 'En cours',
+            link: 'https://futurcraft-institut-seven.vercel.app',
+        },
+        {
             title: 'Portfolio Personnel',
             description: 'Mon portfolio développé avec React et Tailwind.',
             image: '/portfolio.png',
             tech: 'React • Tailwind',
             status: 'Terminé',
-            link: '',
+            link: 'https://loicassogba.vercel.app',
         },
         {
             title: 'Valentin 2.0',
@@ -18,45 +43,28 @@ export default function Projects({ showAll = false }) {
             image: '/valentin.png',
             tech: 'HTML • Tailwind • JS',
             status: 'Terminé',
-            link: '',
-        },
-        {
-            title: 'Gozem-luxe',
-            description:
-                'Site de luxe dédié à la commande de voitures haut de gamme.',
-            image: '/luxe.png',
-            tech: 'React • Tailwind',
-            status: 'En pause',
-            link: '',
-        },
-        {
-            title: 'Calculatrice',
-            description: 'Calculatrice web fonctionnelle.',
-            image: '/calculatrice.png',
-            tech: 'HTML • Tailwind • JS',
-            status: 'Terminé',
-            link: '',
+            link: 'https://valentin-2point0.netlify.app',
         },
         {
             title: 'Benin-Immo',
             description:
                 'Plateforme immobilière dédiée aux ventes et locations.',
             image: '/benin-immo.png',
-            tech: 'HTML • Tailwind • JS',
+            tech: 'Next.js • Tailwind',
             status: 'En cours',
-            link: '',
+            link: 'https://benin-immo.vercel.app/',
         },
         {
             title: 'Solana',
             description:
                 'Landing page de présentation de la blockchain Solana.',
-            image: '/solana.png',
-            tech: 'HTML • Tailwind',
-            status: 'En pause',
-            link: '',
+            image: '/solana1.png',
+            tech: 'HTML • Tailwind • JS',
+            status: 'Terminé',
+            link: 'https://solana-ksm.netlify.app',
         },
         {
-            title: 'Gods Plan',
+            title: "God's Plan",
             description: 'Landing page de présentation de Gods Plan Institut.',
             image: '/god-s-plan.png',
             tech: 'HTML • Tailwind',
