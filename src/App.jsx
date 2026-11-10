@@ -6,6 +6,7 @@ import AllProjects from './pages/AllProjects';
 import Welcome from './components/sections/Welcome';
 import Header from './components/sections/Header';
 import Hero from './components/sections/Hero';
+import Skills from './components/sections/Skills';
 import A_propos from './components/sections/A_propos';
 import Projects from './components/sections/Projects';
 import Cv from './components/sections/Cv';
@@ -17,6 +18,7 @@ function Home() {
         <>
             {' '}
             <Hero />
+            <Skills />
             <A_propos /> <Projects /> <Cv /> <Contact />
         </>
     );
