@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { createPortal } from 'react-dom';
 
 export default function Header() {
@@ -52,32 +52,32 @@ export default function Header() {
             {/* ================= MOBILE HEADER ================= */}
 
             <header
-                className={`relative flex items-center justify-between text-white p-4 lg:hidden transition-all duration-300 sticky top-0 z-40
+                className={`flex items-center justify-between mt-3 mx-2 rounded-xl text-white px-5 py-3 lg:hidden sticky top-0 z-40 transition-all duration-500
                 ${
                     isScrolled
-                        ? 'bg-gray-950/80 backdrop-blur-md rounded-xl m-2 shadow-lg'
-                        : 'bg-gray-950'
+                        ? 'bg-gray-950/25 backdrop-blur-xl border border-white/10 rounded-2xl m-2 shadow-xl'
+                        : 'bg-gray-950/20 backdrop-blur-md border-b border-white/5'
                 }`}
             >
                 <a
                     href="#hero"
                     className="transition-transform duration-300 hover:scale-[1.03]"
                 >
-                    <h1 className="font-clash font-bold text-lg relative group">
-                        <span className="inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
+                    <h1 className="font-clash font-bold text-xl relative group">
+                        <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent">
                             Loïc Assogba
                         </span>
 
-                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full" />
                     </h1>
                 </a>
 
                 <button
                     onClick={() => setIsMenuOpen(true)}
                     aria-label="Ouvrir le menu"
-                    className="p-2 rounded-md hover:bg-gray-800 transition transform active:scale-90"
+                    className="p-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-orange-400/10 hover:border-orange-400/30 transition-all duration-300 active:scale-90"
                 >
-                    <Menu className="w-5 h-5" />
+                    <Menu className="w-5 h-5 text-gray-200" />
                 </button>
             </header>
 
@@ -90,39 +90,44 @@ export default function Header() {
                         onClick={() => setIsMenuOpen(false)}
                     >
                         {/* Fond transparent */}
-                        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
 
                         {/* Menu */}
                         <nav
                             onClick={(e) => e.stopPropagation()}
-                            className="absolute top-4 right-4 w-[min(280px,calc(100vw-32px))] h-fit max-h-[calc(100dvh-32px)] overflow-y-auto rounded-2xl bg-gray-950 text-white p-4 shadow-2xl border border-white/10 animate-slide-in"
+                            className="absolute top-4 right-4 w-[min(300px,calc(100vw-32px))] h-fit max-h-[calc(100dvh-32px)] overflow-y-auto rounded-2xl bg-gray-950/95 backdrop-blur-2xl text-white p-5 shadow-2xl border border-white/10 animate-slide-in"
                         >
-                            <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+                            {/* En-tête du menu */}
+                            <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
                                 <div>
-                                    <p className="text-xs text-gray-400 font-satoshi">
+                                    <p className="text-sm text-gray-500 mt-1">
                                         Navigation
                                     </p>
                                 </div>
 
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="p-2 rounded-lg bg-gray-800/70 hover:bg-orange-400/20 hover:text-orange-400 transition-all duration-300"
+                                    aria-label="Fermer le menu"
+                                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-orange-400/10 hover:text-orange-400 hover:border-orange-400/30 transition-all duration-300"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
-                            <ul className="space-y-1 font-satoshi">
+                            {/* Liens */}
+                            <ul className="space-y-2 font-satoshi">
                                 {links.map((item, i) => (
                                     <li key={i}>
                                         <a
                                             href={item.href}
                                             onClick={() => setIsMenuOpen(false)}
-                                            className="group flex items-center justify-between px-3 py-3 rounded-xl text-sm text-gray-300 transition-all duration-300 hover:bg-orange-400/10 hover:text-orange-400 active:scale-[0.97]"
+                                            className="group flex items-center justify-between px-4 py-3.5 rounded-xl text-sm text-gray-300 border border-transparent transition-all duration-300 hover:bg-orange-400/10 hover:text-orange-400 hover:border-orange-400/10 active:scale-[0.97]"
                                         >
-                                            <span>{item.name}</span>
+                                            <span className="font-medium">
+                                                {item.name}
+                                            </span>
 
-                                            <span className="text-xs text-gray-600 group-hover:text-orange-400">
+                                            <span className="text-xs tracking-wider text-gray-600 group-hover:text-orange-400 transition-colors">
                                                 0{i + 1}
                                             </span>
                                         </a>
@@ -130,14 +135,20 @@ export default function Header() {
                                 ))}
                             </ul>
 
-                            <div className="mt-3 pt-3 border-t border-white/10 px-4">
-                                <p className="text-xs text-gray-500">
+                            {/* Pied du menu */}
+                            <div className="mt-5 pt-4 border-t border-white/10">
+                                <p className="text-sm font-semibold text-white">
                                     Loïc Assogba
                                 </p>
 
-                                <p className="mt-1 text-sm text-orange-400">
+                                <p className="text-xs text-orange-400 mt-1">
                                     Développeur Web Full-Stack
                                 </p>
+
+                                <div className="mt-4 flex items-center gap-2 text-xs text-gray-500">
+                                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                                    Disponible pour de nouvelles opportunités
+                                </div>
                             </div>
                         </nav>
                     </div>,
@@ -147,40 +158,53 @@ export default function Header() {
             {/* ================= DESKTOP HEADER ================= */}
 
             <header
-                className={`hidden lg:flex items-center justify-between py-4 px-6 text-white max-w-6xl mx-auto sticky top-0 z-40 transition-all duration-300
+                className={`hidden lg:flex items-center justify-between py-4 px-7 mt-3 text-white max-w-6xl mx-auto sticky top-0 z-40 transition-all duration-500
                 ${
                     isScrolled
-                        ? 'bg-gray-900/80 backdrop-blur-md rounded-2xl mt-3 shadow-xl border border-white/10'
-                        : 'bg-gray-900'
+                        ? 'bg-gray-950/25 backdrop-blur-xl rounded-2xl mt-3 shadow-xl border border-white/10'
+                        : 'bg-gray-950/20 backdrop-blur-md rounded-2xl border border-white/5'
                 }`}
             >
+                {/* Logo */}
                 <a
                     href="#hero"
                     className="transition-transform duration-300 hover:scale-[1.03]"
                 >
                     <h1 className="font-clash font-bold text-xl relative group">
-                        <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent shine">
+                        <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent">
                             Loïc Assogba
                         </span>
 
-                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full" />
                     </h1>
                 </a>
 
+                {/* Navigation */}
                 <nav>
-                    <ul className="flex items-center gap-x-6 text-sm font-satoshi">
+                    <ul className="flex items-center gap-x-2 text-sm font-satoshi">
                         {links.map((item, i) => (
                             <li key={i}>
                                 <a
                                     href={item.href}
-                                    className="px-3 py-2 rounded-md transition-all duration-150 transform hover:bg-orange-400/10 hover:-translate-y-1 hover:text-orange-400 active:scale-90 active:bg-orange-400/20"
+                                    className="group relative flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-gray-300 transition-all duration-300 hover:text-orange-400 hover:bg-orange-400/10 active:scale-95"
                                 >
                                     {item.name}
+
+                                    <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
                                 </a>
                             </li>
                         ))}
                     </ul>
                 </nav>
+
+                {/* Petit indicateur */}
+                <a
+                    href="#contact"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-400 text-gray-950 text-sm font-semibold hover:bg-orange-300 transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+                >
+                    Me contacter
+                    <ArrowUpRight size={16} />
+                </a>
             </header>
         </>
     );
