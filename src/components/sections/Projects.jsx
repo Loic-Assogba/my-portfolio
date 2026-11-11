@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FolderCheck } from 'lucide-react';
 
 export default function Projects({ showAll = false }) {
     const projects = [
@@ -95,19 +96,33 @@ export default function Projects({ showAll = false }) {
 
             {/* TITRE */}
             <div className="relative text-center mb-14 lg:mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-clash text-white mt-4 mb-5">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 mb-5 rounded-full border border-orange-400/20 bg-orange-400/5 backdrop-blur-md">
+                    <FolderCheck size={17} className="text-orange-400" />
+
+                    <span className="text-xs sm:text-sm text-orange-300 uppercase tracking-[0.2em] font-medium">
+                        Mes réalisations
+                    </span>
+                </div>
+
+                {/* Titre */}
+                <h2 className="text-3xl text-center py-4 md:text-4xl font-clash font-bold mb-10 animate-fade-in lg:text-5xl">
                     Mes{' '}
                     <span className="inline-block text-orange-400 animate-float">
                         Projets
                     </span>
                 </h2>
 
-                <p className="text-center text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-                    Des projets concrets qui reflètent mes compétences et ma
-                    passion pour le développement web.
+                {/* Soulignement */}
+                <div className="w-16 h-1 bg-orange-400 rounded-full mx-auto mb-6" />
+
+                {/* Description */}
+                <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
+                    Des projets concrets et des collaborations qui reflètent mes
+                    compétences, ma créativité et ma passion pour le
+                    développement web.
                 </p>
             </div>
-
             {/* CARTES */}
             <div className="relative grid gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 {displayedProjects.map((project, i) => (
