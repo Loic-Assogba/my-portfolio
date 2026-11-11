@@ -11,6 +11,7 @@ import A_propos from './components/sections/A_propos';
 import Projects from './components/sections/Projects';
 import Cv from './components/sections/Cv';
 import Contact from './components/sections/Contact';
+import Collaboration from './components/sections/Collaboration';
 import Footer from './components/sections/Footer';
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
             <Projects />
             <Cv />
             <Contact />
+            <Collaboration />
         </>
     );
 }
