@@ -1,6 +1,7 @@
 import Button from '../ui/Button';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 
 export default function Contact() {
     return (
@@ -12,13 +13,28 @@ export default function Contact() {
             id="contact"
             className="max-w-6xl mx-auto px-4 pb-4 pt-20 sm:px-6 lg:px-8 py-16 lg:py-24 text-white"
         >
-            {/* TITLE */}
-            <h2 className="text-3xl sm:text-4xl text-center font-clash font-bold mb-12 animate-fade-in">
-                Contactez
-                <span className="inline-block text-orange-400 animate-float">
-                    -moi
-                </span>
-            </h2>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="text-center mb-14 lg:mb-20"
+            >
+                <div className="inline-flex items-center gap-2 px-4 py-2 mb-5 rounded-full border border-orange-400/20 bg-orange-400/5 backdrop-blur-md">
+                    <Mail size={15} className="text-orange-400" />
+
+                    <span className="text-xs sm:text-sm text-orange-300 tracking-widest uppercase">
+                        Restons en contact
+                    </span>
+                </div>
+
+                <h2 className="text-3xl text-center py-4 md:text-4xl lg:text-5xl font-clash font-bold mb-2">
+                    Contactez{' '}
+                    <span className="inline-block text-orange-400">-moi</span>
+                </h2>
+
+                <div className="w-16 h-1 bg-orange-400 rounded-full mx-auto mt-2" />
+            </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                 {/* LEFT INFO */}
