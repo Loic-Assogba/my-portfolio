@@ -16,10 +16,12 @@ import Footer from './components/sections/Footer';
 function Home() {
     return (
         <>
-            {' '}
             <Hero />
             <Skills />
-            <A_propos /> <Projects /> <Cv /> <Contact />
+            <A_propos />
+            <Projects />
+            <Cv />
+            <Contact />
         </>
     );
 }
@@ -42,23 +44,46 @@ function App() {
     }
 
     return (
-        <div
-            className={`font-montserrat transition-all duration-1000 ease-out ${
-                showApp
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-5'
-            }`}
-        >
-            <Header />
+        <>
+            {/* BACKGROUND GLOBAL */}
+            <div className="fixed inset-0 -z-10">
+                <img
+                    src="/background.jpeg"
+                    alt="Loïc Assogba"
+                    className="hidden lg:block absolute inset-0 w-full h-full object-cover object-center"
+                />
 
-            <Routes>
-                <Route path="/" element={<Home />} />
+                {/* IMAGE MOBILE */}
+                <img
+                    src="/background-mobile.jpeg"
+                    alt="Loïc Assogba"
+                    className="block lg:hidden absolute inset-0 w-full h-full object-cover object-center"
+                />
 
-                <Route path="/tous-les-projets" element={<AllProjects />} />
-            </Routes>
+                {/* FILTRE SOMBRE */}
+                <div className="absolute inset-0 bg-gray-950/75"></div>
 
-            <Footer />
-        </div>
+                {/* NUANCE ORANGE */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-black/40"></div>
+            </div>
+
+            <div
+                className={`relative z-0 font-montserrat transition-all duration-1000 ease-out ${
+                    showApp
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-5'
+                }`}
+            >
+                <Header />
+
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/tous-les-projets" element={<AllProjects />} />
+                </Routes>
+
+                <Footer />
+            </div>
+        </>
     );
 }
 
