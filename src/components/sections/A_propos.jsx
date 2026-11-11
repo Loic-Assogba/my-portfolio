@@ -98,7 +98,7 @@ export default function A_propos() {
                         </span>
                     </div>
 
-                    <h2 className="text-3xl text-center py-4 md:text-4xl lg:text-5xl font-clash font-bold mb-10 animate-fade-in">
+                    <h2 className="text-3xl text-center py-4 md:text-4xl lg:text-5xl font-clash font-bold mb-2 animate-fade-in">
                         À propos{' '}
                         <span className="inline-block text-orange-400 animate-float">
                             de moi
