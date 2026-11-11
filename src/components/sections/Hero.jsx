@@ -1,69 +1,73 @@
-import Button from '../ui/Button';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { ArrowDown, ArrowUpRight, Code2 } from 'lucide-react';
 
 export default function Hero() {
     return (
         <motion.section
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             id="hero"
-            className="min-h-[90vh] flex items-center"
+            className="min-h-screen flex items-center relative overflow-hidden"
         >
-            <article className="flex flex-col pt-20 lg:flex-row items-center justify-between gap-10 max-w-6xl mx-auto p-4 lg:p-8">
-                {/* TEXTE */}
-                <div className="lg:w-1/2 font-clash text-4xl lg:text-6xl text-center lg:text-left">
-                    <h1 className="p-2">
-                        Bonjour{' '}
-                        <span className="inline-block text-orange-400 animate-float">
-                            .
-                        </span>
-                    </h1>
+            {/* Décoration lumineuse */}
+            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-orange-400/5 rounded-full blur-[120px] pointer-events-none" />
 
-                    <p className="text-2xl p-3">
-                        Je suis{' '}
-                        <span className="border-b-2 font-medium border-orange-400 pb-1 whitespace-nowrap">
-                            Loïc Assogba
-                        </span>
+            <article className="relative max-w-6xl w-full mx-auto px-6 lg:px-8 pt-24 pb-16">
+                {/* Petit badge */}
+                <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full border border-orange-400/30 bg-orange-400/5 text-orange-400 text-sm"
+                >
+                    <Code2 size={16} />
+                    <span>Bienvenue dans mon univers numérique</span>
+                </motion.div>
+
+                {/* Présentation */}
+                <div className="max-w-4xl">
+                    <p className="text-gray-400 text-lg md:text-xl mb-4">
+                        Bonjour, je suis
+                        <h1 className="text-white/80 font-clash text-4xl sm:text-6xl md:text-7xl lg:text-7xl font-bold leading-tight">
+                            Loïc{' '}
+                            <span className="text-orange-400">Assogba</span>
+                            <span className="text-orange-400">.</span>
+                        </h1>
                     </p>
 
-                    <h2 className="text-3xl text-gray-300 p-2">
-                        Développeur Web Full Stack
+                    <h2 className="mt-6 text-2xl sm:text-2xl md:text-4xl text-gray-200 font-medium">
+                        Développeur Web
+                        <span className="text-orange-400"> Full Stack</span>
                     </h2>
 
-                    <div className="flex justify-center lg:justify-start gap-4 p-4">
-                        <a href="#projets">
-                            <button className="bg-orange-400 text-white text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-500 transition hover">
-                                Mes projets
-                            </button>
+                    <p className="mt-6 max-w-2xl text-gray-400 text-base md:text-lg leading-relaxed">
+                        Je conçois des expériences web modernes, intuitives et
+                        responsives. Passionné par les technologies, je
+                        développe mes compétences et explore également l'univers
+                        de la cybersécurité.
+                    </p>
+
+                    {/* Boutons */}
+                    <div className="flex flex-wrap items-center gap-4 mt-10">
+                        <a
+                            href="#projets"
+                            className="inline-flex items-center gap-3 bg-orange-400 text-gray-950 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-orange-500 transition-all duration-300 hover:-translate-y-1"
+                        >
+                            Découvrir mes projets
+                            <ArrowUpRight size={18} />
                         </a>
 
-                        <a href="#cv">
-                            <button className="border border-orange-400 text-orange-400 text-sm px-4 py-2 rounded-md button-click font-medium hover:bg-orange-400/10 hover:text-orange-400 transition hover">
-                                Mon CV
-                            </button>
+                        <a
+                            href="#cv"
+                            className="inline-flex items-center gap-3 border border-white/20 text-white px-6 py-3 rounded-lg font-medium text-sm hover:border-orange-400 hover:text-orange-400 transition-all duration-300"
+                        >
+                            Consulter mon CV
                         </a>
                     </div>
                 </div>
-                <motion.div
-                    initial={{ opacity: 0, x: 100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.9 }}
-                    viewport={{ once: false }}
-                    className="lg:w-1/2 flex justify-center lg:justify-end relative"
-                >
-                    {/* halo animé */}
-                    <div className="absolute w-72 h-72 bg-orange-400/30 rounded-full blur-3xl animate-pulse"></div>
-
-                    {/* image */}
-                    <img
-                        src="/profile.jpg"
-                        alt="Profil"
-                        className="relative w-64 h-80 object-cover rounded-full border-4 border-orange-400 lg:w-80 lg:h-96"
-                    />
-                </motion.div>{' '}
             </article>
         </motion.section>
     );
