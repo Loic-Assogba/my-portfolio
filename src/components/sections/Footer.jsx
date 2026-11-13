@@ -78,7 +78,7 @@ export default function Footer() {
                             className="inline-flex items-center gap-2 group"
                         >
                             <span className="text-3xl font-bold font-clash">
-                                Loïc Assogba
+                                Loïc ASSOGBA
                             </span>
                         </a>
 
