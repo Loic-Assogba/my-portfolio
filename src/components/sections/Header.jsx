@@ -65,7 +65,7 @@ export default function Header() {
                 >
                     <h1 className="font-clash font-bold text-xl relative group">
                         <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent">
-                            Loïc Assogba
+                            Loïc ASSOGBA
                         </span>
 
                         <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full" />
@@ -138,7 +138,7 @@ export default function Header() {
                             {/* Pied du menu */}
                             <div className="mt-5 pt-4 border-t border-white/10">
                                 <p className="text-sm font-semibold text-white">
-                                    Loïc Assogba
+                                    Loïc ASSOGBA
                                 </p>
 
                                 <p className="text-xs text-orange-400 mt-1">
@@ -172,7 +172,7 @@ export default function Header() {
                 >
                     <h1 className="font-clash font-bold text-xl relative group">
                         <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 bg-clip-text text-transparent">
-                            Loïc Assogba
+                            Loïc ASSOGBA
                         </span>
 
                         <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-orange-400 transition-all duration-300 group-hover:w-full" />
