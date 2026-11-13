@@ -135,7 +135,7 @@ export default function A_propos() {
                             <p>
                                 Je suis{' '}
                                 <span className="text-orange-400 font-semibold">
-                                    Loïc Assogba
+                                    Loïc ASSOGBA
                                 </span>
                                 , développeur Web Full-Stack en formation à
                                 FuturCraft Institut et passionné par la
